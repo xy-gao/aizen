@@ -28,7 +28,6 @@ def add_inside(pupil_size):
     bpy.ops.mesh.inset(thickness=1 - pupil_size, depth=0, release_confirm=True)
     bpy.ops.transform.translate(
         value=(0, 0.2, 0),
-        orient_axis_ortho="X",
         orient_type="GLOBAL",
         orient_matrix=((1, 0, 0), (0, 1, 0), (0, 0, 1)),
         orient_matrix_type="GLOBAL",
@@ -49,7 +48,6 @@ def add_inside(pupil_size):
         },
         TRANSFORM_OT_translate={
             "value": (0, 0.5, 0),
-            "orient_axis_ortho": "X",
             "orient_type": "GLOBAL",
             "orient_matrix": ((1, 0, 0), (0, 1, 0), (0, 0, 1)),
             "orient_matrix_type": "GLOBAL",
@@ -69,7 +67,6 @@ def add_inside(pupil_size):
             "cursor_transform": False,
             "texture_space": False,
             "remove_on_cancel": False,
-            "view2d_edge_pan": False,
             "release_confirm": False,
             "use_accurate": False,
             "use_automerge_and_split": False,
@@ -113,6 +110,7 @@ def add_inside(pupil_size):
 def eye_inside_material(pupil_size, color1, color2):
     mat = bpy.data.materials.new(name="Eye Inside")
     mat.use_nodes = True
+    mat.shadow_method = "NONE"
     nodes = mat.node_tree.nodes
     links = mat.node_tree.links
 

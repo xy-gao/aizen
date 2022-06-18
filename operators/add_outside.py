@@ -40,7 +40,6 @@ def add_outside(size):
 
     bpy.ops.transform.translate(
         value=(-0, -0.05, -0),
-        orient_axis_ortho="X",
         orient_type="GLOBAL",
         orient_matrix=((1, 0, 0), (0, 1, 0), (0, 0, 1)),
         orient_matrix_type="GLOBAL",
@@ -69,6 +68,7 @@ def eye_outside_material(size, vein, color):
     mat = bpy.data.materials.new(name="Eye Outside")
     mat.use_nodes = True
     mat.use_screen_refraction = True
+    mat.shadow_method = "NONE"
 
     nodes = mat.node_tree.nodes
     links = mat.node_tree.links
