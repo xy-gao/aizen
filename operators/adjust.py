@@ -2,11 +2,11 @@ import bpy
 from bpy.props import BoolProperty, FloatProperty, FloatVectorProperty, IntProperty
 
 
-class CreateEye(bpy.types.Operator):
-    """Create Eye"""
+class AdjustEye(bpy.types.Operator):
+    """Adjust Eye"""
 
-    bl_idname = "mesh.create_eye"
-    bl_label = "Create Eye"
+    bl_idname = "mesh.adjust_eye"
+    bl_label = "Adjust Eye"
     bl_options = {"REGISTER", "UNDO"}
 
     glass_size: IntProperty(
@@ -55,27 +55,29 @@ class CreateEye(bpy.types.Operator):
         description="color picker",
     )
 
-    vein: BoolProperty(name="vein", description="Enable or Disable Vein", default=True)
-
     def execute(self, context):
-        bpy.ops.mesh.eye_outside(
+        outside = bpy.context.view_layer.objects.active
+        location = outside.location.copy()
+        rotation_euler = outside.rotation_euler.copy()
+        scale = outside.scale.copy()
+        bpy.ops.object.select_hierarchy(direction="CHILD", extend=False)
+        inside = bpy.context.view_layer.objects.active
+        bpy.data.objects.remove(outside)
+        bpy.data.objects.remove(inside)
+
+        bpy.ops.mesh.create_eye(
             glass_size=self.glass_size,
-            vein=self.vein,
+            pupil_size=self.pupil_size,
+            iris_color1=self.iris_color1,
+            iris_color2=self.iris_color2,
             eye_ball_color=self.eye_ball_color,
         )
-        outside = bpy.context.view_layer.objects.active
-        bpy.ops.mesh.eye_inside(
-            pupil_size=self.pupil_size, color1=self.iris_color1, color2=self.iris_color2
-        )
-        inside = bpy.context.view_layer.objects.active
-        bpy.ops.object.select_all(action="DESELECT")
 
-        outside.select_set(True)
-        inside.select_set(True)
+        target = bpy.context.view_layer.objects.active
 
-        bpy.context.view_layer.objects.active = outside
-
-        bpy.ops.object.parent_set()
+        target.location = location
+        target.rotation_euler = rotation_euler
+        target.scale = scale
 
         obj = bpy.context.view_layer.objects.active
         obj["glass_size"] = self.glass_size
@@ -88,11 +90,11 @@ class CreateEye(bpy.types.Operator):
 
 
 def register():
-    bpy.utils.register_class(CreateEye)
+    bpy.utils.register_class(AdjustEye)
 
 
 def unregister():
-    bpy.utils.unregister_class(CreateEye)
+    bpy.utils.unregister_class(AdjustEye)
 
 
 if __name__ == "__main__":

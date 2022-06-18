@@ -18,6 +18,26 @@ class AizenPanel(bpy.types.Panel):
         row = layout.row()
         row.operator("mesh.create_eye")
 
+        # Adjust
+        layout.label(text="Adjust Eye:")
+        row = layout.row()
+        adjust = row.operator("mesh.adjust_eye")
+
+        obj = bpy.context.view_layer.objects.active
+
+        glass_size = obj.get("glass_size")
+        pupil_size = obj.get("pupil_size")
+        iris_color1 = obj.get("iris_color1")
+        iris_color2 = obj.get("iris_color2")
+        eye_ball_color = obj.get("eye_ball_color")
+
+        if glass_size and pupil_size and iris_color1 and iris_color2 and eye_ball_color:
+            adjust.glass_size = glass_size
+            adjust.pupil_size = pupil_size
+            adjust.iris_color1 = iris_color1
+            adjust.iris_color2 = iris_color2
+            adjust.eye_ball_color = eye_ball_color
+
 
 def register():
     bpy.utils.register_class(AizenPanel)
