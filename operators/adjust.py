@@ -54,6 +54,7 @@ class AdjustEye(bpy.types.Operator):
         size=4,
         description="color picker",
     )
+    vein: BoolProperty(name="vein", description="Enable or Disable Vein", default=True)
 
     def execute(self, context):
         outside = bpy.context.view_layer.objects.active
@@ -71,6 +72,7 @@ class AdjustEye(bpy.types.Operator):
             iris_color1=self.iris_color1,
             iris_color2=self.iris_color2,
             eye_ball_color=self.eye_ball_color,
+            vein=self.vein,
         )
 
         target = bpy.context.view_layer.objects.active
@@ -85,6 +87,7 @@ class AdjustEye(bpy.types.Operator):
         obj["iris_color1"] = self.iris_color1
         obj["iris_color2"] = self.iris_color2
         obj["eye_ball_color"] = self.eye_ball_color
+        obj["vein"] = self.vein
 
         return {"FINISHED"}
 

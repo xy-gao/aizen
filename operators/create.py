@@ -77,12 +77,15 @@ class CreateEye(bpy.types.Operator):
 
         bpy.ops.object.parent_set()
 
+        inside.select_set(False)
+
         obj = bpy.context.view_layer.objects.active
         obj["glass_size"] = self.glass_size
         obj["pupil_size"] = self.pupil_size
         obj["iris_color1"] = self.iris_color1
         obj["iris_color2"] = self.iris_color2
         obj["eye_ball_color"] = self.eye_ball_color
+        obj["vein"] = self.vein
 
         return {"FINISHED"}
 

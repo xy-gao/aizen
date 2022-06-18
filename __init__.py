@@ -4,6 +4,7 @@ from .operators.add_inside import AddInside
 from .operators.add_outside import AddOutside
 from .operators.adjust import AdjustEye
 from .operators.create import CreateEye
+from .operators.mirror import MirrorEye
 from .panels.aizen import AizenPanel
 
 bl_info = {
@@ -17,7 +18,7 @@ bl_info = {
     "version": (0, 0, 1),
 }
 
-classes = [AddInside, AddOutside, CreateEye, AdjustEye, AizenPanel]
+classes = [AddInside, AddOutside, CreateEye, AdjustEye, MirrorEye, AizenPanel]
 
 
 def register():
