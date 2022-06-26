@@ -81,6 +81,57 @@ def add_inside(pupil_size):
     bpy.ops.object.editmode_toggle()
     bpy.ops.object.modifier_apply(modifier="Bevel")
 
+    bpy.ops.object.editmode_toggle()
+    bpy.ops.mesh.select_all(action="SELECT")
+    bpy.ops.mesh.region_to_loop()
+    bpy.ops.mesh.extrude_region_move(
+        MESH_OT_extrude_region={
+            "use_normal_flip": False,
+            "use_dissolve_ortho_edges": False,
+            "mirror": False,
+        },
+        TRANSFORM_OT_translate={
+            "value": (0, 0.5, 0),
+            "orient_axis_ortho": "X",
+            "orient_type": "GLOBAL",
+            "orient_matrix": ((1, 0, 0), (0, 1, 0), (0, 0, 1)),
+            "orient_matrix_type": "GLOBAL",
+            "constraint_axis": (False, True, False),
+            "mirror": False,
+            "use_proportional_edit": False,
+            "proportional_edit_falloff": "SMOOTH",
+            "proportional_size": 1,
+            "use_proportional_connected": False,
+            "use_proportional_projected": False,
+            "snap": False,
+            "snap_target": "CLOSEST",
+            "snap_point": (0, 0, 0),
+            "snap_align": False,
+            "snap_normal": (0, 0, 0),
+            "gpencil_strokes": False,
+            "cursor_transform": False,
+            "texture_space": False,
+            "remove_on_cancel": False,
+            "view2d_edge_pan": False,
+            "release_confirm": False,
+            "use_accurate": False,
+            "use_automerge_and_split": False,
+        },
+    )
+    bpy.ops.transform.resize(
+        value=(1.12, 1.12, 1.12),
+        orient_type="GLOBAL",
+        orient_matrix=((1, 0, 0), (0, 1, 0), (0, 0, 1)),
+        orient_matrix_type="GLOBAL",
+        mirror=True,
+        use_proportional_edit=False,
+        proportional_edit_falloff="SMOOTH",
+        proportional_size=1,
+        use_proportional_connected=False,
+        use_proportional_projected=False,
+    )
+    bpy.ops.object.editmode_toggle()
+
     bpy.ops.view3d.snap_selected_to_cursor(use_offset=False)
 
     import math
@@ -95,6 +146,21 @@ def add_inside(pupil_size):
         orient_type="GLOBAL",
         orient_matrix=((1, 0, 0), (0, 1, 0), (0, 0, 1)),
         orient_matrix_type="GLOBAL",
+        mirror=False,
+        use_proportional_edit=False,
+        proportional_edit_falloff="SMOOTH",
+        proportional_size=1,
+        use_proportional_connected=False,
+        use_proportional_projected=False,
+    )
+
+    bpy.ops.transform.translate(
+        value=(0, 0.05, 0),
+        orient_axis_ortho="X",
+        orient_type="GLOBAL",
+        orient_matrix=((1, 0, 0), (0, 1, 0), (0, 0, 1)),
+        orient_matrix_type="GLOBAL",
+        constraint_axis=(False, True, False),
         mirror=False,
         use_proportional_edit=False,
         proportional_edit_falloff="SMOOTH",
