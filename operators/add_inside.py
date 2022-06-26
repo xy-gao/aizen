@@ -300,7 +300,7 @@ class AddInside(bpy.types.Operator):
     color1: FloatVectorProperty(
         name="color1",
         subtype="COLOR",
-        default=(1.0, 1.0, 1.0, 1.0),
+        default=(0, 0, 1.0, 1.0),
         min=0.0,
         max=1.0,
         size=4,
@@ -310,7 +310,7 @@ class AddInside(bpy.types.Operator):
     color2: FloatVectorProperty(
         name="color2",
         subtype="COLOR",
-        default=(1.0, 1.0, 1.0, 1.0),
+        default=(1.0, 0, 0, 1.0),
         min=0.0,
         max=1.0,
         size=4,

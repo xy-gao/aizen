@@ -88,9 +88,9 @@ def eye_outside_material(size, vein, color):
 
     glass_color_ramp_node.color_ramp.elements[0].position = (
         -0.0007 * (size**2) - 0.0121 * size + 0.9929
-    )
+    ) + 0.02
     glass_color_ramp_node.color_ramp.elements[1].position = (
-        glass_color_ramp_node.color_ramp.elements[0].position + 0.05
+        glass_color_ramp_node.color_ramp.elements[0].position + 0.03
     )
 
     glass_mix_shader_node = nodes.new("ShaderNodeMixShader")
@@ -206,7 +206,7 @@ class AddOutside(bpy.types.Operator):
     glass_size: IntProperty(
         name="Glass Size",
         description="Glass Size",
-        min=0,
+        min=2,
         max=20,
         default=8,
     )

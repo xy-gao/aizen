@@ -12,7 +12,7 @@ class AdjustEye(bpy.types.Operator):
     glass_size: IntProperty(
         name="Glass Size",
         description="Glass Size",
-        min=0,
+        min=2,
         max=20,
         default=8,
     )
@@ -28,7 +28,7 @@ class AdjustEye(bpy.types.Operator):
     iris_color1: FloatVectorProperty(
         name="color1",
         subtype="COLOR",
-        default=(1.0, 1.0, 1.0, 1.0),
+        default=(0, 0, 1.0, 1.0),
         min=0.0,
         max=1.0,
         size=4,
@@ -38,7 +38,7 @@ class AdjustEye(bpy.types.Operator):
     iris_color2: FloatVectorProperty(
         name="color2",
         subtype="COLOR",
-        default=(1.0, 1.0, 1.0, 1.0),
+        default=(1.0, 0, 0, 1.0),
         min=0.0,
         max=1.0,
         size=4,
